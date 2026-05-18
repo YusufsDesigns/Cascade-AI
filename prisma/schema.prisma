@@ -1,0 +1,189 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id          String   @id @default(cuid())
+  name        String
+  email       String   @unique
+  password    String
+  companyName String
+  createdAt   DateTime @default(now())
+
+  projects    Project[]
+  teamMembers TeamMember[]
+}
+
+model Project {
+  id                  String        @id @default(cuid())
+  userId              String
+  user                User          @relation(fields: [userId], references: [id])
+  name                String
+  clientName          String
+  clientEmail         String
+  brief               String        @db.Text
+  clientIntelligence  String?       @db.Text
+  contractSummary     String?       @db.Text
+  websiteInsights     String?       @db.Text
+  completionSummary   String?       @db.Text
+  status              ProjectStatus @default(INTAKE)
+  agentStatus         String        @default("idle")
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+
+  emails          ProjectEmail[]
+  milestones      Milestone[]
+  risks           ProjectRisk[]
+  followUp        FollowUp?
+  intakeForm      IntakeForm?
+  meetingRequests MeetingRequest[]
+  agentEvents     AgentEvent[]
+}
+
+model AgentEvent {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  runType   String   @default("initial")
+  type      String
+  agent     String?
+  message   String   @db.Text
+  eventData Json?
+  createdAt DateTime @default(now())
+}
+
+model ProjectRisk {
+  id          String   @id @default(cuid())
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  description String   @db.Text
+  severity    String   @default("medium")
+  milestone   String?
+  reviewed    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+enum ProjectStatus {
+  INTAKE
+  ONBOARDING
+  ACTIVE
+  COMPLETED
+}
+
+model ProjectEmail {
+  id        String      @id @default(cuid())
+  projectId String
+  project   Project     @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  type      EmailType
+  subject   String
+  recipient String
+  content   String      @db.Text
+  status    EmailStatus @default(DRAFT)
+  sentAt    DateTime?
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+enum EmailType {
+  WELCOME
+  QUESTIONNAIRE
+  CONFIRMATION
+  FOLLOWUP
+  FINALIZATION
+  COMPLETION
+}
+
+model MeetingRequest {
+  id                  String        @id @default(cuid())
+  projectId           String
+  project             Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  reason              String        @db.Text
+  suggestedTopics     String[]
+  draftEmail          String        @db.Text
+  status              MeetingStatus @default(PENDING_REVIEW)
+  sentAt              DateTime?
+  meetingNotes        String?       @db.Text
+  meetingCompleted    Boolean       @default(false)
+  meetingCompletedAt  DateTime?
+  createdAt           DateTime      @default(now())
+}
+
+enum MeetingStatus {
+  PENDING_REVIEW
+  SENT
+  DECLINED
+}
+
+enum EmailStatus {
+  DRAFT
+  APPROVED
+  SENT
+}
+
+model Milestone {
+  id             String          @id @default(cuid())
+  projectId      String
+  project        Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  phase          Int
+  title          String
+  description    String          @db.Text
+  ownerRole      String
+  ownerName      String?
+  ownerEmail     String?
+  dueDate        DateTime?
+  requiresClient Boolean         @default(false)
+  status         MilestoneStatus @default(PENDING)
+  riskNote       String?
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+}
+
+enum MilestoneStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+}
+
+model FollowUp {
+  id          String         @id @default(cuid())
+  projectId   String         @unique
+  project     Project        @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  scheduledAt DateTime
+  qstashId    String?
+  status      FollowUpStatus @default(SCHEDULED)
+  createdAt   DateTime       @default(now())
+}
+
+enum FollowUpStatus {
+  SCHEDULED
+  SENT
+  CANCELLED
+}
+
+model IntakeForm {
+  id          String    @id @default(cuid())
+  projectId   String    @unique
+  project     Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  token       String    @unique @default(cuid())
+  questions   Json
+  answers     Json?
+  submittedAt DateTime?
+  createdAt   DateTime  @default(now())
+}
+
+model TeamMember {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  name      String
+  email     String
+  role      String
+  createdAt DateTime @default(now())
+
+  @@unique([userId, email])
+}

@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(mkdir -p \"C:\\\\Users\\\\yusuf\\\\Desktop\\\\Projects\\\\Next.js Projects\\\\cascade\\\\prisma\")",
+      "Bash(mkdir -p \"C:\\\\Users\\\\yusuf\\\\Desktop\\\\Projects\\\\Next.js Projects\\\\cascade\\\\lib\\\\db\")",
+      "Bash(npx prisma *)",
+      "Bash(npx shadcn@latest init --yes --defaults)",
+      "Bash(npx shadcn@latest add button card input label textarea select checkbox badge tooltip --yes)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Bash(Get-Content *)",
+      "Bash(PRISMA_USER_CONSENT_FOR_DANGEROUS_AI_ACTION=\"Yes go ahead\" npx prisma migrate reset --force)",
+      "Bash(node -e \"const c=require\\('crypto'\\);require\\('fs'\\).appendFileSync\\('.env.local','\\\\nAUTH_SECRET='+c.randomBytes\\(32\\).toString\\('base64url'\\)+'\\\\n'\\)\")",
+      "Bash(node -e \"const b = require\\('bcryptjs'\\); console.log\\(typeof b.hash, typeof b.hashSync, Object.keys\\(b\\).join\\(', '\\)\\)\")",
+      "Bash(node -e \"const p = require\\('./generated/prisma/client'\\); console.log\\('PrismaClient exists:', !!p.PrismaClient\\); console.log\\('Models:', Object.keys\\(new p.PrismaClient\\(\\)\\)\\)\")",
+      "Bash(node --input-type=module -e \"import\\('./generated/prisma/client.js'\\).then\\(m => console.log\\('user' in m.PrismaClient.prototype ? 'User model OK' : 'No user model'\\)\\).catch\\(e => console.error\\(e.message\\)\\)\")",
+      "PowerShell(Get-NetTCPConnection *)",
+      "PowerShell(Stop-Process *)",
+      "PowerShell(Start-Process -FilePath \"npm\" -ArgumentList \"run\",\"dev\" -WorkingDirectory \"C:\\\\Users\\\\yusuf\\\\Desktop\\\\Projects\\\\Next.js Projects\\\\cascade\" -WindowStyle Hidden -RedirectStandardOutput \"C:\\\\Users\\\\yusuf\\\\AppData\\\\Local\\\\Temp\\\\cascade-dev.log\" -RedirectStandardError \"C:\\\\Users\\\\yusuf\\\\AppData\\\\Local\\\\Temp\\\\cascade-dev-err.log\")",
+      "Bash(echo \"PID: $!\")",
+      "PowerShell(Get-Content \"C:\\\\Users\\\\yusuf\\\\Desktop\\\\Projects\\\\Next.js Projects\\\\cascade\\\\.env\" | ForEach-Object { if \\($_ -match \"=\"\\) { $parts = $_ -split \"=\",2; \"$\\($parts[0]\\)=<redacted>\" } else { $_ } })",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "Bash(mkdir -p \"/c/Users/yusuf/Desktop/Projects/Next.js Projects/cascade/app/api/projects/[id]\")",
+      "Bash(mkdir -p \"/c/Users/yusuf/Desktop/Projects/Next.js Projects/cascade/app/api/emails/[id]\")",
+      "Bash(mkdir -p \"/c/Users/yusuf/Desktop/Projects/Next.js Projects/cascade/app/\\(dashboard\\)/projects/[id]\")",
+      "PowerShell(taskkill *)",
+      "Bash(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\yusuf\\\\Desktop\\\\Projects\\\\Next.js Projects\\\\cascade\\\\app\\\\api\\\\onboard\\\\clarify\")",
+      "Bash(Out-Null)",
+      "Bash(Select-String -Pattern \"Dockerfile|docker\")",
+      "Bash(mkdir \"C:\\\\Users\\\\yusuf\\\\Desktop\\\\Projects\\\\Next.js Projects\\\\cascade\\\\app\\\\api\\\\milestones\\\\[id]\\\\assign\")",
+      "Bash(mkdir \"C:\\\\Users\\\\yusuf\\\\Desktop\\\\Projects\\\\Next.js Projects\\\\cascade\\\\app\\\\api\\\\risks\\\\[id]\\\\review\")",
+      "PowerShell(New-Item *)",
+      "Bash(npx next *)",
+      "PowerShell(Get-Process *)",
+      "Bash(mkdir -p \"C:\\\\Users\\\\yusuf\\\\Desktop\\\\Projects\\\\Next.js Projects\\\\cascade\\\\app\\\\api\\\\meeting-requests\\\\[id]\\\\send\")",
+      "Bash(mkdir -p \"C:\\\\Users\\\\yusuf\\\\Desktop\\\\Projects\\\\Next.js Projects\\\\cascade\\\\app\\\\api\\\\meeting-requests\\\\[id]\\\\decline\")",
+      "Bash(node -e ' *)",
+      "Bash(echo \"Dev server PID: $!\")",
+      "Bash(curl *)"
+    ]
+  }
+}
