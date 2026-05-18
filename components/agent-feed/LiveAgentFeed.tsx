@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { CheckCircle2, XCircle, ChevronDown } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { AgentLine, type AgentEvent, type AgentId } from './AgentLine'
 import { AgentSummary } from './AgentSummary'
 import { ClarificationCard } from './ClarificationCard'
@@ -37,6 +38,7 @@ export function LiveAgentFeed({ projectId, initialEvents = [], initialAgentStatu
   const [collapsed, setCollapsed]     = useState(
     initialAgentStatus === 'completed' || initialAgentStatus === 'failed'
   )
+  const router = useRouter()
 
   const lastIdRef  = useRef<string | undefined>(initialEvents[initialEvents.length - 1]?.id)
   const scrollRef  = useRef<HTMLDivElement>(null)
@@ -114,6 +116,7 @@ export function LiveAgentFeed({ projectId, initialEvents = [], initialAgentStatu
           if (newStatus === 'completed' || newStatus === 'failed') {
             stoppedRef.current = true
             setCollapsed(true)
+            router.refresh()
             break
           }
         } catch {

@@ -15,7 +15,14 @@ export async function POST(
 
   const meetingRequest = await prisma.meetingRequest.findFirst({
     where:   { id, project: { userId: session.user.id } },
-    include: { project: { select: { clientName: true, clientEmail: true, name: true } } },
+    include: {
+      project: {
+        select: {
+          clientName: true, clientEmail: true, name: true,
+          user: { select: { email: true, name: true } },
+        },
+      },
+    },
   })
 
   if (!meetingRequest) return NextResponse.json({ error: 'Not found' }, { status: 404 })
@@ -35,6 +42,16 @@ export async function POST(
     where: { id },
     data:  { status: 'SENT', sentAt: new Date(), draftEmail: emailBody },
   })
+
+  // Notify the account owner that the meeting request was sent
+  const pm = meetingRequest.project.user
+  await sendEmail({
+    to:      pm.email,
+    subject: `Meeting request sent — ${meetingRequest.project.name}`,
+    html: `<p>Hi ${pm.name},</p>
+<p>Your meeting request has been sent to <strong>${meetingRequest.project.clientName}</strong> for the project <strong>${meetingRequest.project.name}</strong>.</p>
+<p>Once the meeting has taken place, log the outcome in Cascade so the agents can finalise the project plan.</p>`,
+  }).catch(() => { /* non-critical — PM will see the status update in the UI */ })
 
   return NextResponse.json({ success: true })
 }
