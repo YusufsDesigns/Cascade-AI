@@ -210,7 +210,7 @@ export function DashboardClient({ projects, stats, firstName }: Props) {
                     </span>
 
                     {/* Date */}
-                    <span className="hidden lg:block text-xs text-zinc-300 shrink-0 w-24 text-right">
+                    <span className="hidden lg:block text-xs text-zinc-400 shrink-0 w-24 text-right">
                       {formatDate(project.createdAt)}
                     </span>
 

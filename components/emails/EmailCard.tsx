@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { toast } from 'sonner'
-import { Mail, FileQuestion, CalendarDays, Clock, Check, Pencil, X, Send } from 'lucide-react'
+import { Mail, FileQuestion, CalendarDays, Clock, Check, Pencil, X, Send, FileCheck2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 type EmailType = 'WELCOME' | 'QUESTIONNAIRE' | 'CONFIRMATION' | 'FOLLOWUP' | 'FINALIZATION' | 'COMPLETION'
@@ -23,7 +23,7 @@ const typeConfig: Record<EmailType, { label: string; icon: React.ElementType; co
   QUESTIONNAIRE: { label: 'Intake Questionnaire',   icon: FileQuestion,  color: 'text-violet-600',  bg: 'bg-violet-50'  },
   CONFIRMATION:  { label: 'Intake Confirmation',    icon: CalendarDays,  color: 'text-emerald-600', bg: 'bg-emerald-50' },
   FOLLOWUP:      { label: 'Follow-up',              icon: Clock,         color: 'text-amber-600',   bg: 'bg-amber-50'   },
-  FINALIZATION:  { label: 'Post-Meeting Summary',   icon: CalendarDays,  color: 'text-blue-600',    bg: 'bg-blue-50'    },
+  FINALIZATION:  { label: 'Post-Meeting Summary',   icon: FileCheck2,    color: 'text-blue-600',    bg: 'bg-blue-50'    },
   COMPLETION:    { label: 'Project Completion',     icon: Check,         color: 'text-emerald-600', bg: 'bg-emerald-50' },
 }
 
@@ -97,7 +97,7 @@ export function EmailCard({ email: initial }: { email: Email }) {
       className="bg-white rounded-2xl border border-zinc-100 shadow-sm shadow-zinc-900/4 overflow-hidden"
     >
       {/* Header */}
-      <div className="flex items-start justify-between px-5 pt-5 pb-4 border-b border-zinc-50">
+      <div className="flex items-start justify-between px-5 pt-5 pb-4 border-b border-zinc-100">
         <div className="flex items-start gap-3">
           <div className={cn('w-8 h-8 rounded-xl flex items-center justify-center shrink-0', type.bg)}>
             <Icon className={cn('w-4 h-4', type.color)} />

@@ -178,9 +178,10 @@ export function MilestoneCard({
 
         {/* Risk note */}
         {milestone.riskNote && (
-          <p className="text-xs text-amber-700 bg-amber-50 border border-amber-100 rounded-lg px-2.5 py-1.5 mb-2.5 leading-relaxed">
-            ⚠ {milestone.riskNote}
-          </p>
+          <div className="flex items-start gap-1.5 text-xs text-amber-700 bg-amber-50 border border-amber-100 rounded-lg px-2.5 py-1.5 mb-2.5 leading-relaxed">
+            <AlertTriangle className="w-3 h-3 shrink-0 mt-px" />
+            <span>{milestone.riskNote}</span>
+          </div>
         )}
 
         {/* Status selector pills */}

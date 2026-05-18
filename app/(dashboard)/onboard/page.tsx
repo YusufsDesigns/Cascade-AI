@@ -4,7 +4,7 @@ import { useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { toast } from 'sonner'
-import { ArrowUp, Paperclip, Globe, X, FileText, Zap, Loader2 } from 'lucide-react'
+import { ArrowUp, Paperclip, Globe, X, FileText, Loader2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const EXAMPLES = [
@@ -74,12 +74,8 @@ export default function OnboardPage() {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
-          className="text-center space-y-3 mb-2"
+          className="text-center mb-2"
         >
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-xs font-medium text-indigo-600">
-            <Zap className="w-3 h-3" />
-            Powered by Gemini 2.5 Flash
-          </div>
           <h1 className="text-3xl font-semibold text-zinc-900 tracking-tight leading-snug">
             Describe the deal.<br />
             <span className="text-indigo-500">Cascade handles the rest.</span>
@@ -181,7 +177,7 @@ export default function OnboardPage() {
               <span>Website</span>
             </button>
 
-            <span className="text-zinc-200 text-sm">|</span>
+            <span className="w-px h-4 bg-zinc-200 mx-0.5" />
             <p className="text-[11px] text-zinc-400 flex-1">⌘ + Enter</p>
 
             <button
