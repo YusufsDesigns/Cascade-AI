@@ -390,7 +390,7 @@ model User {
 ### Install Dependencies
 
 ```bash
-git clone https://github.com/dev_lawal/cascade.git
+[git clone https://github.com/YusufsDesigns/Cascade-AI.git](https://github.com/YusufsDesigns/Cascade-AI)
 cd cascade
 npm install
 ```
